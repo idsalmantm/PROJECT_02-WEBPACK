@@ -25,7 +25,7 @@ module.exports = {
             ], //extract scss from JS
         },
         {
-            test: /\.js$/, // target all js file for babel
+            test: /\.jsx?$/, // target all js file for babel
             exclude: /node_modules/, //exclude nod_module as it include million files
             use: {
                 loader: "babel-loader",
@@ -38,7 +38,10 @@ module.exports = {
     devtool: "source-map",
     // use MiniCssExtractPlugin
     plugins: [new MiniCssExtractPlugin()],
-
+    //resolution that accept js and jsx file without extension
+    resolve: {
+        extensions: [".js", ".jsx"]
+    },
     //point distribution folder to load html file automatically
     devServer: {
         contentBase: "./dist",

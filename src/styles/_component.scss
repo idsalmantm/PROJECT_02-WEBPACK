@@ -13,3 +13,16 @@
     color: var(--textColor);
     border: 1px solid variable.$Secondary; // new method of using variable
 }
+
+.hero {
+    width: 300px;
+    height: 30px;
+    background: mediumseagreen;
+    color: white;
+
+
+}
+
+.hero-sub {
+    background: yellow;
+}

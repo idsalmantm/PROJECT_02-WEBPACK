@@ -1,18 +1,7 @@
-import "./styles/main.scss";
+import { render } from "react-dom";
 
+import App from "./components/App";
 
-const hyundaiVenue2019 = {
-    engine: 1,
-    color: 'blue',
-    mileage: 10,
+//render the app div into textbox html area - refer app.js file to see the content
+render(<App />, document.getElementById("textbox"));
 
-}
-
-const hyundaiVenueSalman = {
-    ...hyundaiVenue2019,
-    regNo: 'kl60 2244',
-    mileage: 15
-}
-
-console.log(hyundaiVenue2019);
-console.log(hyundaiVenueSalman);
