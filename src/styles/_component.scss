@@ -1,0 +1,15 @@
+@use "variable";
+
+
+
+.container {
+    display: flex;
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(to bottom, magenta, purple);
+}
+
+.box {
+    color: var(--textColor);
+    border: 1px solid variable.$Secondary; // new method of using variable
+}

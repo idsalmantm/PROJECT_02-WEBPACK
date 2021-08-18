@@ -1,3 +1,6 @@
+import "./styles/main.scss";
+
+
 const hyundaiVenue2019 = {
     engine: 1,
     color: 'blue',
