@@ -12,3 +12,9 @@
 ### In Order to have backward compatibility make sure sure that you have the following hidden file
 
 .browserslistrc
+
+new CopyPlugin({
+patterns: [
+{ from: './src/assets', to: 'assets' }
+]
+}),

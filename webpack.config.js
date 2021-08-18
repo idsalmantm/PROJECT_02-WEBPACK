@@ -1,6 +1,10 @@
 //importing MiniCssExtract Plugin
+const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { default: dist } = require("mini-css-extract-plugin/dist");
 
 
 //making the mode more dynamic , for production with minified version , for dev more readable format
@@ -12,10 +16,17 @@ if (process.env.NODE_ENV === "production") {
 };
 
 module.exports = {
+    entry: {
+        bundle: './src/index.js'
+    },
     //Activate Developing mode to view codes in Normal Format , Change to Product for Security
     mode: mode,
     // babel and other plugin configuration
     target: target,
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        assetModuleFilename: 'assets/images/[name][ext]',
+    },
     module: {
         rules: [{
             test: /\.scss$/i, //to find all css file and extract same from JS
@@ -35,7 +46,14 @@ module.exports = {
         {
             test: /\.(.jpe?g|png|gif|svg|ico|woff|woff2|eos|ttf)$/i,
             use: {
-                loader: "file-loader",
+                loader: 'url-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                    context: path.resolve(__dirname, "src/"),
+                    outputPath: 'dist/',
+                    publicPath: '../',
+                    useRelativePaths: true
+                }
             }
         }
 
@@ -45,11 +63,15 @@ module.exports = {
     devtool: "source-map",
     // use MiniCssExtractPlugin,File Copy Plugin
     plugins: [
-        new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
         new CopyPlugin({
             patterns: [
                 { from: './src/assets', to: 'assets' }
             ]
+        }),
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
         })],
     //resolution that accept js and jsx file without extension
     resolve: {
