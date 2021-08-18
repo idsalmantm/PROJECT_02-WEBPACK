@@ -1,5 +1,6 @@
 //importing MiniCssExtract Plugin
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 //making the mode more dynamic , for production with minified version , for dev more readable format
@@ -31,13 +32,25 @@ module.exports = {
                 loader: "babel-loader",
             }
         },
+        {
+            test: /\.(.jpe?g|png|gif|svg|ico|woff|woff2|eos|ttf)$/i,
+            use: {
+                loader: "file-loader",
+            }
+        }
 
         ]
     },
     // to false to see main.js file in a readable format , or use source-map
     devtool: "source-map",
-    // use MiniCssExtractPlugin
-    plugins: [new MiniCssExtractPlugin()],
+    // use MiniCssExtractPlugin,File Copy Plugin
+    plugins: [
+        new MiniCssExtractPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: './src/assets', to: 'assets' }
+            ]
+        })],
     //resolution that accept js and jsx file without extension
     resolve: {
         extensions: [".js", ".jsx"]
